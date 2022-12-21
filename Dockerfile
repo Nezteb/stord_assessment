@@ -37,7 +37,7 @@ COPY lib lib
 RUN mix compile
 
 EXPOSE 4000
-CMD ["mix", "phx.server"]
+CMD mix ecto.setup && mix phx.server
 
 # TODO: Set up multi-stage builds for dev vs prod (using alpine image) for a smaller (more secure) image
 # Create release

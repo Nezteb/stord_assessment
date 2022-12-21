@@ -15,7 +15,7 @@ defmodule StordAssessmentWeb.UrlControllerTest do
     url: "http://example.com/123",
     visits: 43
   }
-  @invalid_attrs %{hash: nil, url: nil, visits: nil}
+  @invalid_attrs %{hash: nil, url: "asdf", visits: nil}
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}

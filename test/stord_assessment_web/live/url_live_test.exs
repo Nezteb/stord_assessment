@@ -6,7 +6,7 @@ defmodule StordAssessmentWeb.UrlLiveTest do
 
   @create_attrs %{url: "http://example.com"}
   @update_attrs %{url: "http://example.com/test"}
-  @invalid_attrs %{url: nil}
+  @invalid_attrs %{url: "asdf"}
 
   defp create_url(_) do
     url = url_fixture()
@@ -33,7 +33,7 @@ defmodule StordAssessmentWeb.UrlLiveTest do
 
       assert index_live
              |> form("#url-form", url: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> render_change() =~ "invalid url scheme"
 
       {:ok, _, html} =
         index_live
@@ -55,7 +55,7 @@ defmodule StordAssessmentWeb.UrlLiveTest do
 
       assert index_live
              |> form("#url-form", url: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> render_change() =~ "invalid url scheme"
 
       {:ok, _, html} =
         index_live
@@ -95,7 +95,7 @@ defmodule StordAssessmentWeb.UrlLiveTest do
 
       assert show_live
              |> form("#url-form", url: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> render_change() =~ "invalid url scheme"
 
       {:ok, _, html} =
         show_live

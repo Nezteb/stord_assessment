@@ -11,5 +11,5 @@ test:
 	docker compose -f test.compose.yaml up -d database
 
 	docker compose -f test.compose.yaml build app
-	docker compose -f test.compose.yaml run app mix test
+	docker compose -f test.compose.yaml run app mix test --cover || true
 	docker compose -f test.compose.yaml down --remove-orphans

@@ -1,4 +1,5 @@
 defmodule StordAssessment.UrlShortener.Url do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -21,6 +22,13 @@ defmodule StordAssessment.UrlShortener.Url do
 
   def create_changeset(attrs),
     do: %__MODULE__{} |> changeset(attrs)
+
+  def update_changeset(url, attrs) do
+    url
+    |> cast(attrs, [:url, :hash, :visits])
+    |> validate_url(:url)
+    |> unique_constraint(:url, name: :url_unique)
+  end
 
   # Borrowed from https://dev.to/hlappa/url-shorten-er-with-elixir-and-phoenix-aol
   def validate_url(changeset, field, options \\ %{}) do

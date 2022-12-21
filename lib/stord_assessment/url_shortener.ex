@@ -77,12 +77,12 @@ defmodule StordAssessment.UrlShortener do
 
   """
   def update_url(%Url{} = existing_url, attrs) do
-    new_url = get_atom_or_string_key(attrs, :url, "")
+    new_url = get_atom_or_string_key(attrs, :url, existing_url.url)
     hash = Base.url_encode64(new_url, padding: false)
     new_visits = get_atom_or_string_key(attrs, :visits, existing_url.visits)
 
     existing_url
-    |> Url.changeset(%{
+    |> Url.update_changeset(%{
       url: new_url,
       hash: hash,
       visits: new_visits
@@ -121,7 +121,7 @@ defmodule StordAssessment.UrlShortener do
     new_visits = get_atom_or_string_key(attrs, :visits, existing_url.visits)
 
     existing_url
-    |> Url.changeset(%{
+    |> Url.update_changeset(%{
       url: new_url,
       hash: hash,
       visits: new_visits

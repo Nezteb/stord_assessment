@@ -8,7 +8,7 @@ defmodule StordAssessment.UrlShortenerTest do
 
     import StordAssessment.UrlShortenerFixtures
 
-    @invalid_attrs %{hash: nil, url: nil, visits: nil}
+    @invalid_attrs %{hash: nil, url: "asdf", visits: nil}
 
     test "list_urls/0 returns all urls" do
       url = url_fixture()

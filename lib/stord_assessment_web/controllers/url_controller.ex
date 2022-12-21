@@ -13,7 +13,7 @@ defmodule StordAssessmentWeb.UrlController do
         text(conn, "404")
 
       %Url{} = url ->
-        UrlShortener.update_url(url, %{visits: url.visits + 1}) |> dbg()
+        UrlShortener.update_url(url, %{visits: url.visits + 1})
         redirect(conn, external: url.url)
     end
   end
