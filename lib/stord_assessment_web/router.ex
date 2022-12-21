@@ -17,12 +17,18 @@ defmodule StordAssessmentWeb.Router do
   scope "/", StordAssessmentWeb do
     pipe_through :browser
 
+    get "/", PageController, :index
+
+    live "/stats", UrlLive.Index, :index
+
     live "/urls", UrlLive.Index, :index
     live "/urls/new", UrlLive.Index, :new
     live "/urls/:id/edit", UrlLive.Index, :edit
 
     live "/urls/:id", UrlLive.Show, :show
     live "/urls/:id/show/edit", UrlLive.Show, :edit
+
+    get "/:hash", UrlController, :redirect_to
   end
 
   # Other scopes may use custom stacks.

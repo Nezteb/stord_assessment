@@ -11,9 +11,7 @@ defmodule StordAssessment.UrlShortenerFixtures do
     {:ok, url} =
       attrs
       |> Enum.into(%{
-        hash: "some hash",
-        url: "some url",
-        visits: 42
+        "url" => "http://example.com",
       })
       |> StordAssessment.UrlShortener.create_url()
 

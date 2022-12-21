@@ -4,8 +4,8 @@ defmodule StordAssessmentWeb.UrlLiveTest do
   import Phoenix.LiveViewTest
   import StordAssessment.UrlShortenerFixtures
 
-  @create_attrs %{hash: "some hash", url: "some url", visits: 42}
-  @update_attrs %{hash: "some updated hash", url: "some updated url", visits: 43}
+  @create_attrs %{url: "http://example.com"}
+  @update_attrs %{url: "http://example.com/test"}
   @invalid_attrs %{hash: nil, url: nil, visits: nil}
 
   defp create_url(_) do

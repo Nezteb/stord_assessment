@@ -1,10 +1,22 @@
 defmodule StordAssessmentWeb.UrlController do
   use StordAssessmentWeb, :controller
+  require Logger
 
   alias StordAssessment.UrlShortener
   alias StordAssessment.UrlShortener.Url
 
   action_fallback StordAssessmentWeb.FallbackController
+
+  def redirect_to(conn, %{"hash" => hash}) do
+    case UrlShortener.get_url_by_hash(hash) do
+      nil ->
+        text(conn, "404")
+
+      %Url{} = url ->
+        UrlShortener.update_url(url, %{visits: url.visits + 1}) |> dbg()
+        redirect(conn, external: url.url)
+    end
+  end
 
   def index(conn, _params) do
     urls = UrlShortener.list_urls()

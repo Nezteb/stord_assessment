@@ -17,12 +17,13 @@
 
   <li>
     <strong>Url:</strong>
-    <%= @url.url %>
+    <%= live_redirect @url.url, to: @url.url %>
+
   </li>
 
   <li>
     <strong>Hash:</strong>
-    <%= @url.hash %>
+    <%= live_redirect @url.hash, to: Routes.url_path(@socket, :redirect_to, @url.hash) %>
   </li>
 
   <li>

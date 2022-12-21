@@ -37,6 +37,8 @@ defmodule StordAssessment.UrlShortener do
   """
   def get_url!(id), do: Repo.get!(Url, id)
 
+  def get_url_by_hash(hash), do: Repo.get_by(Url, hash: hash)
+
   @doc """
   Creates a url.
 
@@ -50,8 +52,14 @@ defmodule StordAssessment.UrlShortener do
 
   """
   def create_url(attrs \\ %{}) do
-    %Url{}
-    |> Url.changeset(attrs)
+    url = Map.get(attrs, "url", "")
+    hash = Base.url_encode64(url, padding: false)
+
+    Url.create_changeset(%{
+      url: url,
+      hash: hash,
+      visits: 0
+    })
     |> Repo.insert()
   end
 
@@ -67,9 +75,16 @@ defmodule StordAssessment.UrlShortener do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_url(%Url{} = url, attrs) do
-    url
-    |> Url.changeset(attrs)
+  def update_url(%Url{} = existing_url, attrs) do
+    new_url = Map.get(attrs, "url", existing_url.url)
+    hash = Base.url_encode64(new_url, padding: false)
+
+    existing_url
+    |> Url.changeset(%{
+      url: new_url,
+      hash: hash,
+      visits: attrs.visits
+    })
     |> Repo.update()
   end
 
@@ -98,7 +113,15 @@ defmodule StordAssessment.UrlShortener do
       %Ecto.Changeset{data: %Url{}}
 
   """
-  def change_url(%Url{} = url, attrs \\ %{}) do
-    Url.changeset(url, attrs)
+  def change_url(%Url{} = existing_url, attrs \\ %{}) do
+    new_url = Map.get(attrs, "url", "")
+    hash = Base.url_encode64(new_url, padding: false)
+
+    existing_url
+    |> Url.changeset(%{
+      url: new_url,
+      hash: hash,
+      visits: existing_url.visits
+    })
   end
 end

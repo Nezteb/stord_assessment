@@ -26,8 +26,8 @@
   <tbody id="urls">
     <%= for url <- @urls do %>
       <tr id={"url-#{url.id}"}>
-        <td><%= url.url %></td>
-        <td><%= url.hash %></td>
+        <td><%= live_redirect url.url, to: url.url %></td>
+        <td><%= live_redirect url.hash, to: Routes.url_path(@socket, :redirect_to, url.hash) %></td>
         <td><%= url.visits %></td>
 
         <td>

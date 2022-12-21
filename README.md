@@ -1,19 +1,28 @@
-# StordAssessment
+# URL Shortener
 
-To start your Phoenix server:
+## Build Instructions
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+If you have a recent version of Docker installed:
+- To build and run the service:
+  - `make`
+- To run tests:
+  - `make test`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+If you have Elixir 1.14 installed locally:
+- To build and run the service:
+  - `mix deps.get`
+  - `mix phx.server`
+- To run tests:
+  - `mix test`
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+[Original instructions PDF](./Backend_Assessment_-_URL_Shortner_.pdf)
 
-## Learn more
+## TODO
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+Things I wanted to do but didn't have time:
+- LiveView tests
+- Controller tests
+- OpenAPI spec for REST API
+  - Via https://github.com/open-api-spex/open_api_spex
+- Property-based testing for URLs/hashes
+  - Via https://github.com/alfert/propcheck

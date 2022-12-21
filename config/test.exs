@@ -9,7 +9,9 @@ config :stord_assessment, StordAssessment.Repo,
   username: System.get_env("DB_USERNAME") || "postgres",
   password: System.get_env("DB_PASSWORD") || "postgres",
   hostname: System.get_env("DB_HOSTNAME") || "localhost",
-  database: System.get_env("DB_DATABASE") || "stord_assessment_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database:
+    System.get_env("DB_DATABASE") ||
+      "stord_assessment_test#{System.get_env("MIX_TEST_PARTITION")}",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool: Ecto.Adapters.SQL.Sandbox,
