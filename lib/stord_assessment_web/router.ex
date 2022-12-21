@@ -17,13 +17,18 @@ defmodule StordAssessmentWeb.Router do
   scope "/", StordAssessmentWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/urls", UrlLive.Index, :index
+    live "/urls/new", UrlLive.Index, :new
+    live "/urls/:id/edit", UrlLive.Index, :edit
+
+    live "/urls/:id", UrlLive.Show, :show
+    live "/urls/:id/show/edit", UrlLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", StordAssessmentWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", StordAssessmentWeb do
+    pipe_through :api
+  end
 
   # Enables LiveDashboard only for development
   #

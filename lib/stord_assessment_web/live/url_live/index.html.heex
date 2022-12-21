@@ -1,0 +1,43 @@
+<h1>Listing Urls</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.url_index_path(@socket, :index)}>
+    <.live_component
+      module={StordAssessmentWeb.UrlLive.FormComponent}
+      id={@url.id || :new}
+      title={@page_title}
+      action={@live_action}
+      url={@url}
+      return_to={Routes.url_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th>Hash</th>
+      <th>Visits</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="urls">
+    <%= for url <- @urls do %>
+      <tr id={"url-#{url.id}"}>
+        <td><%= url.url %></td>
+        <td><%= url.hash %></td>
+        <td><%= url.visits %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.url_show_path(@socket, :show, url) %></span>
+          <span><%= live_patch "Edit", to: Routes.url_index_path(@socket, :edit, url) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: url.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Url", to: Routes.url_index_path(@socket, :new) %></span>

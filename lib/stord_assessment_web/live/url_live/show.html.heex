@@ -1,0 +1,36 @@
+<h1>Show Url</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.url_show_path(@socket, :show, @url)}>
+    <.live_component
+      module={StordAssessmentWeb.UrlLive.FormComponent}
+      id={@url.id}
+      title={@page_title}
+      action={@live_action}
+      url={@url}
+      return_to={Routes.url_show_path(@socket, :show, @url)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @url.url %>
+  </li>
+
+  <li>
+    <strong>Hash:</strong>
+    <%= @url.hash %>
+  </li>
+
+  <li>
+    <strong>Visits:</strong>
+    <%= @url.visits %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.url_show_path(@socket, :edit, @url), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.url_index_path(@socket, :index) %></span>
