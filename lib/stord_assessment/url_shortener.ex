@@ -52,13 +52,14 @@ defmodule StordAssessment.UrlShortener do
 
   """
   def create_url(attrs \\ %{}) do
-    url = Map.get(attrs, "url", "")
+    url = get_atom_or_string_key(attrs, :url, "")
     hash = Base.url_encode64(url, padding: false)
+    visits = get_atom_or_string_key(attrs, :visits, 0)
 
     Url.create_changeset(%{
       url: url,
       hash: hash,
-      visits: 0
+      visits: visits
     })
     |> Repo.insert()
   end
@@ -76,14 +77,15 @@ defmodule StordAssessment.UrlShortener do
 
   """
   def update_url(%Url{} = existing_url, attrs) do
-    new_url = Map.get(attrs, "url", existing_url.url)
+    new_url = get_atom_or_string_key(attrs, :url, "")
     hash = Base.url_encode64(new_url, padding: false)
+    new_visits = get_atom_or_string_key(attrs, :visits, existing_url.visits)
 
     existing_url
     |> Url.changeset(%{
       url: new_url,
       hash: hash,
-      visits: attrs.visits
+      visits: new_visits
     })
     |> Repo.update()
   end
@@ -114,14 +116,35 @@ defmodule StordAssessment.UrlShortener do
 
   """
   def change_url(%Url{} = existing_url, attrs \\ %{}) do
-    new_url = Map.get(attrs, "url", "")
+    new_url = get_atom_or_string_key(attrs, :url, "")
     hash = Base.url_encode64(new_url, padding: false)
+    new_visits = get_atom_or_string_key(attrs, :visits, existing_url.visits)
 
     existing_url
     |> Url.changeset(%{
       url: new_url,
       hash: hash,
-      visits: existing_url.visits
+      visits: new_visits
     })
+  end
+
+  defp get_atom_or_string_key(map, key, default) when is_atom(key) do
+    value = Map.get(map, key, nil)
+
+    if value == nil do
+      get_atom_or_string_key(map, Atom.to_string(key), default)
+    else
+      value
+    end
+  end
+
+  defp get_atom_or_string_key(map, key, default) when is_binary(key) do
+    value = Map.get(map, key, nil)
+
+    if value == nil do
+      default
+    else
+      value
+    end
   end
 end

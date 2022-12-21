@@ -6,7 +6,7 @@ defmodule StordAssessmentWeb.UrlLiveTest do
 
   @create_attrs %{url: "http://example.com"}
   @update_attrs %{url: "http://example.com/test"}
-  @invalid_attrs %{hash: nil, url: nil, visits: nil}
+  @invalid_attrs %{url: nil}
 
   defp create_url(_) do
     url = url_fixture()
@@ -42,7 +42,7 @@ defmodule StordAssessmentWeb.UrlLiveTest do
         |> follow_redirect(conn, Routes.url_index_path(conn, :index))
 
       assert html =~ "Url created successfully"
-      assert html =~ "some hash"
+      assert html =~ "aHR0cDovL2V4YW1wbGUuY29t"
     end
 
     test "updates url in listing", %{conn: conn, url: url} do
@@ -64,7 +64,7 @@ defmodule StordAssessmentWeb.UrlLiveTest do
         |> follow_redirect(conn, Routes.url_index_path(conn, :index))
 
       assert html =~ "Url updated successfully"
-      assert html =~ "some updated hash"
+      assert html =~ "aHR0cDovL2V4YW1wbGUuY29tL3Rlc3Q"
     end
 
     test "deletes url in listing", %{conn: conn, url: url} do
@@ -104,7 +104,7 @@ defmodule StordAssessmentWeb.UrlLiveTest do
         |> follow_redirect(conn, Routes.url_show_path(conn, :show, url))
 
       assert html =~ "Url updated successfully"
-      assert html =~ "some updated hash"
+      assert html =~ "aHR0cDovL2V4YW1wbGUuY29tL3Rlc3Q"
     end
   end
 end

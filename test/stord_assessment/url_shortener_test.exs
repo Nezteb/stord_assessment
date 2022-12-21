@@ -21,11 +21,11 @@ defmodule StordAssessment.UrlShortenerTest do
     end
 
     test "create_url/1 with valid data creates a url" do
-      valid_attrs = %{hash: "some hash", url: "some url", visits: 42}
+      valid_attrs = %{hash: "aHR0cDovL2V4YW1wbGUuY29tLzEyMw", url: "http://example.com/123", visits: 42}
 
       assert {:ok, %Url{} = url} = UrlShortener.create_url(valid_attrs)
-      assert url.hash == "some hash"
-      assert url.url == "some url"
+      assert url.hash == "aHR0cDovL2V4YW1wbGUuY29tLzEyMw"
+      assert url.url == "http://example.com/123"
       assert url.visits == 42
     end
 
@@ -35,11 +35,11 @@ defmodule StordAssessment.UrlShortenerTest do
 
     test "update_url/2 with valid data updates the url" do
       url = url_fixture()
-      update_attrs = %{hash: "some updated hash", url: "some updated url", visits: 43}
+      update_attrs = %{hash: "aHR0cDovL2V4YW1wbGUuY29tLzEyMw", url: "http://example.com/123", visits: 43}
 
       assert {:ok, %Url{} = url} = UrlShortener.update_url(url, update_attrs)
-      assert url.hash == "some updated hash"
-      assert url.url == "some updated url"
+      assert url.hash == "aHR0cDovL2V4YW1wbGUuY29tLzEyMw"
+      assert url.url == "http://example.com/123"
       assert url.visits == 43
     end
 

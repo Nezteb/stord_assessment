@@ -27,10 +27,15 @@ defmodule StordAssessment.UrlShortener.Url do
     validate_change(changeset, field, fn :url, url ->
       uri = URI.parse(url)
 
-      if uri.scheme == nil do
-        [{field, options[:message] || "invalid url"}]
-      else
-        []
+      cond do
+        uri.scheme in [nil, ""] ->
+          [{field, options[:message] || "invalid url scheme"}]
+
+        uri.host in [nil, ""] ->
+          [{field, options[:message] || "invalid url host"}]
+
+        true ->
+          []
       end
     end)
   end

@@ -6,13 +6,13 @@ defmodule StordAssessmentWeb.UrlControllerTest do
   alias StordAssessment.UrlShortener.Url
 
   @create_attrs %{
-    hash: "some hash",
-    url: "some url",
+    hash: "aHR0cDovL2V4YW1wbGUuY29t",
+    url: "http://example.com",
     visits: 42
   }
   @update_attrs %{
-    hash: "some updated hash",
-    url: "some updated url",
+    hash: "aHR0cDovL2V4YW1wbGUuY29tLzEyMw",
+    url: "http://example.com/123",
     visits: 43
   }
   @invalid_attrs %{hash: nil, url: nil, visits: nil}
@@ -37,8 +37,8 @@ defmodule StordAssessmentWeb.UrlControllerTest do
 
       assert %{
                "id" => ^id,
-               "hash" => "some hash",
-               "url" => "some url",
+               "hash" => "aHR0cDovL2V4YW1wbGUuY29t",
+               "url" => "http://example.com",
                "visits" => 42
              } = json_response(conn, 200)["data"]
     end
@@ -60,8 +60,8 @@ defmodule StordAssessmentWeb.UrlControllerTest do
 
       assert %{
                "id" => ^id,
-               "hash" => "some updated hash",
-               "url" => "some updated url",
+               "hash" => "aHR0cDovL2V4YW1wbGUuY29tLzEyMw",
+               "url" => "http://example.com/123",
                "visits" => 43
              } = json_response(conn, 200)["data"]
     end
