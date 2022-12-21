@@ -7,7 +7,7 @@ defmodule StordAssessmentWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_stord_assessment_key",
-    signing_salt: "RQ+tSDF9"
+    signing_salt: "3gz081ag"
   ]
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
