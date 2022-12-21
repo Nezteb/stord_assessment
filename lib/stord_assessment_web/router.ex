@@ -28,6 +28,8 @@ defmodule StordAssessmentWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", StordAssessmentWeb do
     pipe_through :api
+
+    resources "/urls", UrlController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development
