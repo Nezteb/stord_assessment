@@ -8,7 +8,7 @@ If you have a recent version of Docker installed:
 - To run tests:
   - `make test`
 
-If you have Elixir 1.14 installed locally:
+If you have Elixir 1.14 installed and Postgres running locally :
 - To build and run the service:
   - `mix deps.get`
   - `mix ecto.setup`
@@ -23,7 +23,9 @@ Once running, head to [`http://localhost:4000/stats`](http://localhost:4000/stat
 ## TODO
 
 Things I wanted to do but didn't have time:
+- Full Elixir typespecs
 - GitHub Action that runs linter, build, tests
+- REST API pagination
 - More LiveView tests
 - More controller tests
 - OpenAPI spec for REST API

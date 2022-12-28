@@ -20,6 +20,7 @@ defmodule StordAssessmentWeb.Router do
     get "/", PageController, :index
 
     live "/stats", UrlLive.Index, :index
+    post "/csv", UrlController, :export_csv
 
     live "/urls", UrlLive.Index, :index
     live "/urls/new", UrlLive.Index, :new

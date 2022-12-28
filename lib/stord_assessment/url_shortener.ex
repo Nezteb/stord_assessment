@@ -5,8 +5,9 @@ defmodule StordAssessment.UrlShortener do
 
   import Ecto.Query, warn: false
   alias StordAssessment.Repo
-
   alias StordAssessment.UrlShortener.Url
+  alias NimbleCSV.RFC4180, as: CSV
+
 
   @doc """
   Returns the list of urls.
@@ -19,6 +20,24 @@ defmodule StordAssessment.UrlShortener do
   """
   def list_urls do
     Repo.all(Url)
+  end
+
+  def urls_to_csv do
+    # Map.values returns values in alphabetical order based on their key,
+    # so we sort the headers to match in the resulting list for the CSV
+    fields = [:url, :visits, :hash, :inserted_at] |> Enum.sort()
+
+    urls = list_urls()
+    |> Enum.map(fn url ->
+      url
+      |> Map.from_struct()
+      |> Map.take(fields)
+      |> Map.values()
+    end)
+
+    [fields | urls]
+    |> dbg()
+    |> CSV.dump_to_iodata()
   end
 
   @doc """

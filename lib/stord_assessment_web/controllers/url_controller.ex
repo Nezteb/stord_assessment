@@ -18,6 +18,15 @@ defmodule StordAssessmentWeb.UrlController do
     end
   end
 
+  def export_csv(conn, __params) do
+    csv = UrlShortener.urls_to_csv()
+
+    conn
+    |> put_resp_content_type("text/csv")
+    |> put_resp_header("content-disposition", "attachment; filename=\"urls.csv\"")
+    |> send_resp(200, csv)
+  end
+
   def index(conn, _params) do
     urls = UrlShortener.list_urls()
     render(conn, "index.json", urls: urls)

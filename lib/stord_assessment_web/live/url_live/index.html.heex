@@ -13,6 +13,10 @@
   </.modal>
 <% end %>
 
+<%= link to: Routes.url_path(@socket, :export_csv), class: "button", method: :post do %>
+  Export CSV
+<% end %>
+
 <table>
   <thead>
     <tr>
